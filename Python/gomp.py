@@ -10,8 +10,7 @@ import os, re
 
 np.random.seed(123456789)
 
-mydir = os.path.expanduser("~/GitHub/Task2/uMax/")
-
+mydir = os.path.expanduser("~/GitHub/Task2_Traits/")
 
 # Modified Gompertz Equation
 def m_gop(t, b0, A, umax, L):
@@ -71,6 +70,7 @@ def cleanData(path_IN, path_OUT, wells = 48):
     for line in IN:
         line_clean = line.strip().split('\t')
         if len(line_clean) == wells + 2:
+            line_clean
             if line_clean[0] == 'Time':
                 line_clean[1] = 'Temp_C'
                 for j, item in enumerate(line_clean):
@@ -206,13 +206,14 @@ def modGompGrowth(IN_file_name, interceptGuess=0.1, delta = 0.05, synergy=True, 
             plt.plot(best.endog, y_pred, c = 'blue', lw = 2)
             #fig.tight_layout(pad = 0.5)
             fig_direct =  re.split(r'[./]',path_OUT)
-            fig_direct[-4] = 'figs'
-            fig_direct[-3] = 'model_fits'
-            fig_direct.remove(fig_direct[-1])
-            fig_direct = '/'.join(fig_direct)
-            if not os.path.exists(fig_direct):
-                os.makedirs(fig_direct)
-            fig_name = fig_direct + '/' + IN[column].name + '.png'
+            #fig_direct[-4] = 'figures/uMax'
+            #fig_direct[-3] = 'model_fits'
+            fig_path = mydir + 'figures/uMax/model_fits/' + fig_direct[-2]
+            #fig_direct.remove(fig_direct[-1])
+            #fig_direct = '/'.join(fig_direct)
+            if not os.path.exists(fig_path):
+                os.makedirs(fig_path)
+            fig_name = fig_path + '/' + IN[column].name + '.png'
             fig.savefig(fig_name, bbox_inches = "tight", pad_inches = 0.4, dpi = 600)
             plt.close()
 
