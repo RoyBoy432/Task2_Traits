@@ -13,8 +13,8 @@ def runAnalysis():
     for x in os.listdir(raw_data):
         if x == '.DS_Store':
             continue
-        #if x != 'Task2_48hr_24well_2017_06_23':
-        #    continue
+        if x != 'Task2_48hr_48well_discon_170829_134555':
+            continue
         path_IN = raw_data + x + '/' + x + '.txt'
         path_OUT = clean_data + x + '.txt'
         gp.cleanData(path_IN, path_OUT, wells = 48)
