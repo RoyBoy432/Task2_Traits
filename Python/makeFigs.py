@@ -13,7 +13,7 @@ def runAnalysis():
     for x in os.listdir(raw_data):
         if x == '.DS_Store':
             continue
-        if x != 'Task2_48hr_48well_discon_170829_134555':
+        if x != 'Task2_48hr_48well_discon_170901_135527':
             continue
         path_IN = raw_data + x + '/' + x + '.txt'
         path_OUT = clean_data + x + '.txt'
