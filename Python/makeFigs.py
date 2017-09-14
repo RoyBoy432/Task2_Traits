@@ -48,8 +48,8 @@ def mergeParams():
 
 
 
-runAnalysis()
-#mergeParams()
+#runAnalysis()
+mergeParams()
 
 #IN = pd.read_csv(mydir + 'data/uMax/mergedParams.txt', sep = '\t')
 #IN = IN.loc[IN['Strain'] != 'S']
