@@ -3,7 +3,7 @@ import os, re
 import gomp as gp
 import pandas as pd
 import  matplotlib.pyplot as plt
-
+from collections import Counter
 
 mydir = os.path.expanduser("~/GitHub/Task2_Traits/")
 
@@ -44,12 +44,33 @@ def mergeParams():
     dfs_merged['Strain'] = dfs_merged['Sample'].apply(lambda x: x[2])
     dfs_merged['Replicate'] = dfs_merged['Sample'].apply(lambda x: x[3])
     dfs_merged['Day'] = dfs_merged['Sample'].apply(lambda x: x[-3:])
-    dfs_merged.to_csv(mydir + 'data/mergedParams.txt', sep = '\t', index = False)
+    dfs_merged.to_csv(mydir + 'data/uMax/mergedParams.txt', sep = '\t', index = False)
 
 
+def sample_summary():
+    days = ['100', '200', '300', '400', '500']
+    strains = ['B', 'C', 'D', 'F', 'J', 'P', 'S']
+    transfers = ['0', '1', '2']
+    reps = ['1', '2', '3', '4', '5']
+    params = pd.read_csv(mydir + 'data/uMax/mergedParams.txt', sep = '\t')
+    OUT = open(mydir + 'data/uMax/sample_summary.txt', 'w')
+    count_reps =  dict(Counter(params.Sample.values))
+    print>> OUT, 'Sample', 'Done'
+    for day in days:
+        for strain in strains:
+            for transfer in transfers:
+                for rep in reps:
+                    sample = 'L' + transfer + strain + rep + '-' + day
+                    if (sample in count_reps) and (count_reps[sample]) >= 3:
+                        print>> OUT, sample, 'TRUE'
+                    else:
+                        print>> OUT, sample, 'FALSE'
+    OUT.close()
 
-runAnalysis()
+
+#runAnalysis()
 #mergeParams()
+sample_summary()
 
 #IN = pd.read_csv(mydir + 'data/uMax/mergedParams.txt', sep = '\t')
 #IN = IN.loc[IN['Strain'] != 'S']
