@@ -1,6 +1,7 @@
 from __future__ import division
 import os, re
 import gomp as gp
+import gomp_death as gpd
 import pandas as pd
 import  matplotlib.pyplot as plt
 from collections import Counter
@@ -17,8 +18,8 @@ def runAnalysis():
             continue
         path_IN = raw_data + x + '/' + x + '.txt'
         path_OUT = clean_data + x + '.txt'
-        gp.cleanData(path_IN, path_OUT, wells = 48)
-        gp.modGompGrowth(path_OUT, smooth = True)
+        gpd.cleanData(path_IN, path_OUT, wells = 48)
+        gpd.modGompGrowth(path_OUT, smooth = True)
 
 
 def getTransferTime(x):
@@ -68,9 +69,9 @@ def sample_summary():
     OUT.close()
 
 
-#runAnalysis()
+runAnalysis()
 #mergeParams()
-sample_summary()
+#sample_summary()
 
 #IN = pd.read_csv(mydir + 'data/uMax/mergedParams.txt', sep = '\t')
 #IN = IN.loc[IN['Strain'] != 'S']
