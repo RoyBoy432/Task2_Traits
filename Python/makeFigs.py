@@ -8,18 +8,22 @@ from collections import Counter
 
 mydir = os.path.expanduser("~/GitHub/Task2_Traits/")
 
-def runAnalysis():
+def runAnalysis(gpd = False):
     raw_data = mydir + 'data/uMax/raw_data/'
     clean_data = mydir + 'data/uMax/clean_data/'
     for x in os.listdir(raw_data):
         if x == '.DS_Store':
             continue
-        if x != 'Task2_48hr_48well_discon_170901_135527':
+        if x != 'Task2_48hr_48well_discon_170928_135419':
             continue
         path_IN = raw_data + x + '/' + x + '.txt'
         path_OUT = clean_data + x + '.txt'
-        gpd.cleanData(path_IN, path_OUT, wells = 48)
-        gpd.modGompGrowth(path_OUT, smooth = True)
+        gp.cleanData(path_IN, path_OUT, wells = 48)
+        if gpd == True:
+            gpd.modGompGrowth(path_OUT, smooth = True)
+        else:
+            gp.modGompGrowth(path_OUT, smooth = True)
+
 
 
 def getTransferTime(x):
