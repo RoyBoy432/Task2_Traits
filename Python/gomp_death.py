@@ -133,6 +133,7 @@ def modGompGrowth(IN_file_name, interceptGuess=0.1, delta = 0.05, synergy=True, 
         to_remove = IN_wells.loc[IN_wells['Keep'] == False].SampleRep.values
         IN_file_name_split =  re.split(r'[./]', IN_file_name)
         IN_file_name_split[-3] = 'params'
+        #IN_file_name_split[-2] = IN_file_name_split[-2].replace('_clean', '_params')
         IN_file_name_split[-2] = IN_file_name_split[-2].replace('_clean', '_params')
         path_OUT = '/'.join(IN_file_name_split[:-1]) + '.' + IN_file_name_split[-1]
         OUT = open(path_OUT, 'w')
@@ -179,14 +180,14 @@ def modGompGrowth(IN_file_name, interceptGuess=0.1, delta = 0.05, synergy=True, 
 
             # we're going to loop through the following combination of
             # parameter values
-            #umax1_start_list = [0.05,0.1,1]
-            #umax2_start_list = [-0.05,-0.1,-1,0.05,0.1,1]
-            #L_start_list = [-5,-0.5,0.1,5,10,20]
-            #z_start_list = [-2,-0.5]
-            umax1_start_list = [0.05]
-            umax2_start_list = [-1]
-            L_start_list = [5]
-            z_start_list = [-0.5]
+            umax1_start_list = [0.05,0.1,1]
+            umax2_start_list = [-0.05,-0.1,-1,0.05,0.1,1]
+            L_start_list = [-5,-0.5,0.1,5,10,20]
+            z_start_list = [-2,-0.5]
+            #umax1_start_list = [0.05]
+            #umax2_start_list = [-1]
+            #L_start_list = [5]
+            #z_start_list = [-0.5]
             # and while keeping the following initial values constant
             b0_start = interceptGuess
             A1_start = max(s_trim)
@@ -243,7 +244,7 @@ def modGompGrowth(IN_file_name, interceptGuess=0.1, delta = 0.05, synergy=True, 
             fig_direct =  re.split(r'[./]',path_OUT)
             #fig_direct[-4] = 'figures/uMax'
             #fig_direct[-3] = 'model_fits'
-            fig_path = mydir + 'figures/uMax/model_fits/' + fig_direct[-2]
+            fig_path = mydir + 'figures/uMax/model_fits_gpd/' + fig_direct[-2]
             #fig_direct.remove(fig_direct[-1])
             #fig_direct = '/'.join(fig_direct)
             if not os.path.exists(fig_path):
